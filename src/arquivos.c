@@ -3,17 +3,18 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-void salvar_binario_avioes(struct aeronave *inicio) {
-    FILE *arquivo = fopen("avioes.bin", "wb"); 
+//Função que cria o arquivo .bin/ sobrescreve eçe
+void salvar_binario_avioes(struct aeronave *inicio) 
+ {
+    FILE *arquivo = fopen("avioes.bin", "wb"); //se fopen retornar 0, mostra a mensagem de erro.bin
     if (arquivo == NULL) {
         printf("Erro.bin\n");
         return;
     }
-    
 
-    while (inicio != NULL) {
+    while (inicio != NULL) { //vai percorrer aeronaves eescrever
         fwrite(inicio, sizeof(struct aeronave), 1, arquivo);
-        inicio = inicio->prox;
+        inicio = inicio->prox; //avança para o próximo nó da lista, ex: ID sai de 1 e vai para 2 
     }
     fclose(arquivo);
 }
@@ -54,21 +55,21 @@ void carregar_binario_avioes(struct lista_aeronaves *lista) {
 }
 
 void carregar_binario_rotas(struct lista_rotas *lista) {
-    FILE *arquivo = fopen("rotas.bin", "rb");
+    FILE *arquivo = fopen("rotas.bin", "rb"); // Abre o arquivo "rotas.bin" no modo de leitura binária ("rb") e retorna um ponteiro para ele
+                                            // se o arquivo não existir, fopen retorna NULL.
     if (arquivo == NULL) return;
-
     struct rota *novo;
     while (1) {
         novo = (struct rota*) malloc(sizeof(struct rota));
         
-        if (fread(novo, sizeof(struct rota), 1, arquivo) == 0) {
-            free(novo);
+        if (fread(novo, sizeof(struct rota), 1, arquivo) == 0) //quando chegar no final da lista ou ter erro, fread = 0
+        {
+            free(novo); //evita vazamento de memória
             break;
         }
-        
         novo->prox = NULL;
-        adicionar_rota(lista, novo);
+        adicionar_rota(lista, novo); //vai pegar todas os dados que foram lidos e vai adicioar uma nova rota
     }
     fclose(arquivo);
-    printf("Carregadas %d rotas do arquivo.\n", lista->qtd);
+    printf("Carregadas %d rotas do arquivo.\n", lista->qtd); //retorna quantas rotas foram carregadas
 }

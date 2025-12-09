@@ -2,11 +2,6 @@
 #include <string.h>
 #include <stdlib.h>
 
-struct aeronave* buscar_recursivo(struct aeronave *e, char *mat) {
-    if (!e) return NULL;   
-    if (strcmp(e->matricula, mat) == 0) return e;
-    return buscar_recursivo(e->prox, mat);   
-}
 
 void imprimir_aviao(struct aeronave *a) {
     printf("ID: %d | Modelo: %s | Fab: %s | Mat: %s | Ano: %d | Sit: %s\n",

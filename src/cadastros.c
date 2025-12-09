@@ -10,20 +10,20 @@ void iniciar_lista_aeronaves(struct lista_aeronaves *lista) {
 }
 
 void iniciar_lista_rotas(struct lista_rotas *lista) {
-    lista->inicio = NULL;
-    lista->fim = NULL;
-    lista->qtd = 0;
+    lista->inicio = NULL; // o primeiro nó começa nulo
+    lista->fim = NULL; // "" ultimo "" finaliza "", ou seja, lista vazia.
+    lista->qtd = 0; // torna os itens inicias 0, caso não tenha sido aberto algum arquivo .bin
 }
 
 void adicionar_aeronave(struct lista_aeronaves *lista, struct aeronave *novo) {
-    if (lista->inicio == NULL) {
+    if (lista->inicio == NULL) { //se inicio for nulo, o elemento que entrar vira o primeiro e o ultimo
         lista->inicio = novo;
         lista->fim = novo;
     } else {
-        lista->fim->prox = novo;
-        lista->fim = novo;
+        lista->fim->prox = novo; //se já tiver elemento .bin, o ultimo nó vai apontar para o mais novo
+        lista->fim = novo;      //atualiza o final da lista
     }
-    lista->qtd++;
+    lista->qtd++; //aumenta a quantidade dos elementos
 }
 
 void adicionar_rota(struct lista_rotas *lista, struct rota *novo) {
@@ -40,35 +40,35 @@ void adicionar_rota(struct lista_rotas *lista, struct rota *novo) {
 struct aeronave* criar_aeronave(int id_atual) {
     struct aeronave *novo = (struct aeronave*) malloc(sizeof(struct aeronave));
     
-    novo->id = id_atual + 1;
+    novo->id = id_atual + 1; // acessa o ID, 
     printf("\n--- Cadastro de Aeronave (ID: %d) ---\n", novo->id);
 
     printf("Modelo: ");
     fgets(novo->modelo, TAM_TEXTO, stdin);
-    remover_enter(novo->modelo);
-    para_maiusculo(novo->modelo);
+    remover_enter(novo->modelo);            //remove o ENTER quando apertar no teclado
+    para_maiusculo(novo->modelo);           //converte para maiúsculas para facilitar a busca
 
     printf("Fabricante: ");
     fgets(novo->fabricante, TAM_TEXTO, stdin);
-    remover_enter(novo->fabricante);
+    remover_enter(novo->fabricante); //novo aponta para o malloc, criando uma alocação de memória para o que ver a seguir ->
     para_maiusculo(novo->fabricante);
 
     printf("Matricula/Prefixo: ");
-    fgets(novo->matricula, TAM_TEXTO, stdin);
+    fgets(novo->matricula, TAM_TEXTO, stdin); //stdin lê o teclado
     remover_enter(novo->matricula);
     para_maiusculo(novo->matricula);
 
     printf("Ano Fabricacao: ");
     scanf("%d", &novo->ano);
-    getchar();
+    getchar(); //tirar o \n quando o usuário clicar em ENTER 
 
     printf("Tipo (Carga/Passageiro): ");
-    fgets(novo->tipo, TAM_TEXTO, stdin);
+    fgets(novo->tipo, TAM_TEXTO, stdin); 
     remover_enter(novo->tipo);
     para_maiusculo(novo->tipo);
 
     printf("Capacidade: ");
-    scanf("%d", &novo->capacidade);
+    scanf("%d", &novo->capacidade); //& para numeros
     getchar();
 
     printf("Situacao (Operacao/Manutencao): ");
