@@ -3,10 +3,10 @@
 
 #include "tipos.h"
 
-void salvar_avioes(struct aeronave *inicio);
-void salvar_rotas(struct rota *inicio);
+void salvar_binario_avioes(struct aeronave *inicio);
+void salvar_binario_rotas(struct rota *inicio);
 
-void carregar_avioes(struct lista_aeronaves *lista);
-void carregar_rotas(struct lista_rotas *lista);
+void carregar_binario_avioes(struct lista_aeronaves *lista);
+void carregar_binario_rotas(struct lista_rotas *lista);
 
 #endif
