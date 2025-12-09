@@ -5,6 +5,7 @@
 struct aeronave {
     int id;
     char modelo[TAM_TEXTO];
+    char fabricante[TAM_TEXTO];
     char matricula[TAM_TEXTO];
     int ano;
     char tipo [TAM_TEXTO];
