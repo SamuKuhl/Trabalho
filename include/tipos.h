@@ -35,7 +35,7 @@ struct lista_aeronaves{
     int qtd;
 };
 
-struct tipos{
+struct lista_rotas{
     struct rota *inicio;
     struct rota *fim;
     int qtd;
