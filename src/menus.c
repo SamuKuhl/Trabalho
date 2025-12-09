@@ -3,13 +3,13 @@
 
 int menu_principal() {
     int op;
-    printf("\n=== CONTROLE DE FROTA AEREA ===\n");
+    printf("\n--- CONTROLE DE FROTA AEREA ---\n");
     printf("1. Cadastros\n");
     printf("2. Relatorios e Consultas\n");
     printf("0. Sair\n");
     printf("Escolha: ");
     scanf("%d", &op);
-    getchar(); // Limpa o buffer do teclado
+    getchar(); 
     return op;
 }
 
@@ -50,7 +50,7 @@ int menu_saida() {
     printf("\nComo deseja ver o resultado?\n");
     printf("1. Na Tela\n");
     printf("2. Arquivo CSV (Excel)\n");
-    printf("3. Arquivo HTML (Site)\n");
+    printf("3. Arquivo HTML\n");
     printf("0. Cancelar\n");
     printf("Escolha: ");
     scanf("%d", &op);

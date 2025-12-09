@@ -6,7 +6,7 @@
 void salvar_binario_avioes(struct aeronave *inicio) {
     FILE *arquivo = fopen("avioes.bin", "wb"); 
     if (arquivo == NULL) {
-        printf("Erro ao criar arquivo avioes.bin\n");
+        printf("Erro.bin\n");
         return;
     }
     
@@ -21,7 +21,7 @@ void salvar_binario_avioes(struct aeronave *inicio) {
 void salvar_binario_rotas(struct rota *inicio) {
     FILE *arquivo = fopen("rotas.bin", "wb");
     if (arquivo == NULL) {
-        printf("Erro ao criar arquivo rotas.bin\n");
+        printf("Erro.bin\n");
         return;
     }
 
