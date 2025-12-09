@@ -53,7 +53,7 @@ int main() {
                         if (op_saida == 0) continue; 
                         
                         if (op_saida > 1) { 
-                            printf("Nome do arquivo (sem extensao): ");
+                            printf("Nome do arquivo: ");
                             fgets(nome_arquivo, 100, stdin);
                             remover_enter(nome_arquivo);
                             if (op_saida == 2) strcat(nome_arquivo, ".csv");

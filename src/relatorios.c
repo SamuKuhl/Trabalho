@@ -1,7 +1,7 @@
 #include "../include/relatorios.h"
 #include <string.h>
 #include <stdlib.h>
-
+#include <stdio.h> 
 
 void imprimir_aviao(struct aeronave *a) {
     printf("ID: %d | Modelo: %s | Fab: %s | Mat: %s | Ano: %d | Sit: %s\n",
@@ -13,30 +13,79 @@ void imprimir_rota(struct rota *r) {
            r->codigo, r->origem, r->destino, r->id_aviao);
 }
 
-
 void listar_todos_avioes(struct aeronave *i) {
-    if (!i) printf("Nenhum aviao cadastrado.\n");
-    while (i) { imprimir_aviao(i); i = i->prox; }
+    if (!i) printf("Nenhum aviao cadastrado.\n"); /// Se a lista estiver vazia
+    while (i) { imprimir_aviao(i); i = i->prox; } // Percorre a lista encadeada
 }
 
 void listar_todas_rotas(struct rota *i) {
     if (!i) printf("Nenhuma rota cadastrada.\n");
     while (i) { imprimir_rota(i); i = i->prox; }
 }
-#define FILTRO_TEXTO(lista, campo, valor, func) \
-    while (lista) { if (strstr(lista->campo, valor)) func(lista); lista = lista->prox; }
 
-#define FILTRO_INT(lista, campo, valor, func) \
-    while (lista) { if (lista->campo == valor) func(lista); lista = lista->prox; }
 
-void filtrar_avioes_fabricante(struct aeronave *i, char *fab){ FILTRO_TEXTO(i,fabricante,fab,imprimir_aviao); }
-void filtrar_avioes_tipo(struct aeronave *i, char *t){ FILTRO_TEXTO(i,tipo,t,imprimir_aviao); }
-void filtrar_avioes_modelo(struct aeronave *i, char *m){ FILTRO_TEXTO(i,modelo,m,imprimir_aviao); }
-void filtrar_avioes_ano(struct aeronave *i, int ano){ FILTRO_INT(i,ano,ano,imprimir_aviao); }
-void filtrar_avioes_situacao(struct aeronave *i, char *s){ FILTRO_TEXTO(i,situacao,s,imprimir_aviao); }
+void filtrar_avioes_fabricante(struct aeronave *i, char *fab) {
+    while (i) {
+        if (strstr(i->fabricante, fab)) {
+            imprimir_aviao(i); // Imprime cada aeronave
+        }
+        i = i->prox; // Avança para o próximo elemento
+    }
+}
 
-void filtrar_rotas_destino(struct rota *i, char *d){ FILTRO_TEXTO(i,destino,d,imprimir_rota); }
-void filtrar_rotas_origem(struct rota *i, char *o){ FILTRO_TEXTO(i,origem,o,imprimir_rota); }
+void filtrar_avioes_tipo(struct aeronave *i, char *t) {
+    while (i) {
+        if (strstr(i->tipo, t)) { //strstr busca se existe se o texto está contiddo dentro de i->fabricante
+            imprimir_aviao(i); //se sim, imprime
+        }
+        i = i->prox;
+    }
+}
+
+void filtrar_avioes_modelo(struct aeronave *i, char *m) {
+    while (i) {
+        if (strstr(i->modelo, m)) {
+            imprimir_aviao(i);
+        }
+        i = i->prox;
+    }
+}
+
+void filtrar_avioes_ano(struct aeronave *i, int ano) {
+    while (i) {
+        if (i->ano == ano) {
+            imprimir_aviao(i);
+        }
+        i = i->prox;
+    }
+}
+
+void filtrar_avioes_situacao(struct aeronave *i, char *s) {
+    while (i) {
+        if (strstr(i->situacao, s)) {
+            imprimir_aviao(i);
+        }
+        i = i->prox;
+    }
+}
+
+void filtrar_rotas_destino(struct rota *i, char *d) {
+    while (i) {
+        if (strstr(i->destino, d)) {
+            imprimir_rota(i);
+        }
+        i = i->prox;
+    }
+}
+
+void filtrar_rotas_origem(struct rota *i, char *o) {
+    while (i) {
+        if (strstr(i->origem, o)) {
+            imprimir_rota(i);
+        }
+        i = i->prox;
+    }
+}
 
 void exportar_avioes(struct aeronave *i, int tipo, char *nome) {
     FILE *f = fopen(nome, "w");
